@@ -9,4 +9,4 @@ DEFAULT_TEXT_ON = "Bild an!"
 DEFAULT_TEXT_OFF = "Bild aus!"
 
 # Intents
-INTENT_TOGGLE_SCREEN = "hermes/intent/Philipp:toggleScreen"
+INTENT_TOGGLE_SCREEN = "Philipp:toggleScreen"
