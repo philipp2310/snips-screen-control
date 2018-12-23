@@ -44,11 +44,11 @@ def action_wrapper(hermes, intentMessage, conf):
     if "text_an" in conf['global']:
       text_an = conf['global']['text_an'] 
     else:
-      text_an = "Bild an!"
+      text_an = DEFAULT_TEXT_ON
     if "text_aus" in conf['global']:
       text_aus = conf['global']['text_aus'] 
     else:
-      text_aus = "Bild aus!"
+      text_aus = DEFAULT_TEXT_OFF
     if "acoustic_feedback" in conf['global']:
       feedback = conf['global']['akustisches_feedback']
     else:
@@ -81,6 +81,12 @@ def action_wrapper(hermes, intentMessage, conf):
 
 
 if __name__ == "__main__":
+    # Use the assistant's language.
+    with open("/usr/share/snips/assistant/assistant.json") as json_file:
+            language = json.load(json_file)["language"]
+            
+    self.i18n = importlib.import_module("translations." + language)
+    
     with Hermes("localhost:1883") as h:
         h.subscribe_intent("Philipp:toggleScreen", subscribe_intent_callback) \
          .start()
