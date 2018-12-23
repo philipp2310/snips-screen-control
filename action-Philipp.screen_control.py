@@ -42,15 +42,15 @@ def action_wrapper(hermes, intentMessage, conf):
     result_sentence = ""
     # Map parameters to variable and get default values if they are missing
     if "text_an" in conf['global']:
-      text_an = conf['global']['text_an'] 
+      text_an = conf['global'][i18n.PARA_TEXT_ON] 
     else:
-      text_an = DEFAULT_TEXT_ON
+      text_an = i18n.DEFAULT_TEXT_ON
     if "text_aus" in conf['global']:
-      text_aus = conf['global']['text_aus'] 
+      text_aus = conf['global'][i18n.PARA_TEXT_OFF] 
     else:
-      text_aus = DEFAULT_TEXT_OFF
+      text_aus = i18n.DEFAULT_TEXT_OFF
     if "acoustic_feedback" in conf['global']:
-      feedback = conf['global']['akustisches_feedback']
+      feedback = conf['global'][i18n.PARA_FEEDBACK]
     else:
       feedback = "1"
     
@@ -85,7 +85,7 @@ if __name__ == "__main__":
     with open("/usr/share/snips/assistant/assistant.json") as json_file:
             language = json.load(json_file)["language"]
             
-    self.i18n = importlib.import_module("translations." + language)
+    i18n = importlib.import_module("translations." + language)
     
     with Hermes("localhost:1883") as h:
         h.subscribe_intent("Philipp:toggleScreen", subscribe_intent_callback) \
